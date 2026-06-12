@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HR Onboarding — Admissions-style Form (Grey Theme)</title>
+  <style>
+    /* Palette & basic reset (grey theme + accent) */
+    :root{
+      --bg:#f9fafb;
+      --panel:#ffffff;
+      --line:rgba(128,128,128,.15);
+      --brand:#6b6b6b;
+      --brand-strong:#3a3a3a;
+      --accent:#fac24f;
+      --muted:#7a7a7a;
+      --danger:#b84d4d;
+      --radius:8px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:var(--bg);font-family:Lato, "Segoe UI", Roboto, Arial, sans-serif;color:var(--brand-strong)}
+    a{color:inherit}
+    /* wrapper like admissions page */
+    #wrapper{max-width:1180px;margin:18px auto;padding:0}
+    .container-fluid{width:100%}
+    .row-fluid{display:flex;flex-wrap:wrap;margin:0 -8px}
+    .span12{padding:0 8px;width:100%}
+    .span6{padding:0 8px;width:50%}
+    .headerlogo{margin-bottom:12px}
+    .header{background:linear-gradient(90deg, rgba(128,128,128,.04), rgba(250,194,79,.03));padding:12px;border-radius:6px;border-bottom:3px solid var(--accent)}
+    .reportlogo{display:flex;align-items:center;gap:12px}
+    .logo-left{flex:1}
+    .logo-right{text-align:right;flex:0 0 220px}
+    .logo-placeholder{height:64px;background:linear-gradient(90deg, var(--brand), var(--brand-strong));color:white;display:flex;align-items:center;justify-content:center;border-radius:6px;font-weight:700}
+    .logo-small{height:46px;background:#fff;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);padding:6px 10px;color:var(--brand-strong)}
+    /* popup / panel area */
+    .PopupDiv{background:var(--panel);border-radius:10px;padding:14px;border:1px solid var(--line);box-shadow:0 8px 20px rgba(58,58,58,.06)}
+    .online-app-title{font-size:20px;margin:0 0 12px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .green-note{font-size:12px;padding:8px 12px;border-radius:6px;border:2px solid lightgreen;background:#f7fff7;color:#246b30}
+    /* navbar steps like admissions */
+    .rootwizard{margin-top:8px}
+    .online-app-nav{list-style:none;padding:0;margin:0;display:flex;gap:6px;flex-wrap:wrap}
+    .online-app-nav li{background:linear-gradient(180deg,#fff,#f6f6f6);border:1px solid var(--line);padding:8px 12px;border-radius:6px;font-weight:700;color:var(--brand-strong)}
+    .online-app-nav li.active{background:linear-gradient(180deg, var(--brand), var(--brand-strong));color:white;box-shadow:0 6px 18px rgba(58,58,58,.12)}
+    /* form fields styling */
+    .FormFields{margin:8px 0 18px}
+    .FormFields label{display:block;font-weight:700;margin-bottom:6px;color:var(--brand-strong)}
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea, input[type="date"]{
+      width:100%;padding:10px 12px;border-radius:6px;border:1px solid var(--line);background:#fff;color:var(--brand-strong)
+    }
+    .selection-box{display:block}
+    .datepicker{position:relative}
+    .date-label{display:block;color:var(--muted);font-size:12px;margin-top:6px}
+    /* grid tweaks for vertical spacing */
+    .form-row{display:flex;flex-wrap:wrap;margin:0 -8px}
+    .col{padding:0 8px;margin-bottom:10px}
+    .col-6{width:50%}
+    .col-12{width:100%}
+    /* selection inline toggles */
+    .selection-inline{display:flex;gap:8px;flex-wrap:wrap}
+    .selection-inline label{background:#fff;border:1px solid var(--line);padding:8px 10px;border-radius:6px;cursor:pointer}
+    /* bottom buttons */
+    .form-actions{display:flex;gap:8px;justify-content:flex-end;padding-top:10px;border-top:1px solid var(--line);margin-top:12px}
+    .btn{padding:10px 14px;border-radius:6px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:700}
+    .btn-primary{background:linear-gradient(90deg,var(--brand),var(--brand-strong));color:#fff;border-color:transparent}
+    .btn-secondary{background:#fff;color:var(--brand-strong)}
+    /* small helpers */
+    .required{color:var(--danger);font-weight:700}
+    .note{font-size:13px;color:var(--muted)}
+    .hidden{display:none}
+    @media(max-width:820px){
+      .span6{width:100%}
+      .col-6{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <form id="hrOnboardForm" method="post" enctype="multipart/form-data" novalidate>
+      <div class="container-fluid headerlogo">
+        <div class="row-fluid">
+          <div class="span12">
+            <div class="header">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr valign="middle">
+                  <td>
+                    <div class="reportlogo">
+                      <div class="logo-left">
+                        <div class="logo-placeholder">Your Org Logo</div>
+                      </div>
+                      <td class="logo-right">
+                        <div class="logo-small">ed-admin</div>
+                      </td>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="PopupDiv">
+        <div class="container-fluid">
+          <div class="row-fluid">
+            <div class="span12">
+              <h2 class="online-app-title">
+                HR Onboarding Application
+                <div class="green-note">Green Fields are mandatory</div>
+              </h2>
+
+              <div class="rootwizard">
+                <div class="navbar navbar-inverse">
+                  <div class="navbar-inner" style="padding:0 6px">
+                    <div class="container NoPadding">
+                      <ul class="nav online-app-nav" role="tablist" aria-label="form steps">
+                        <li class="active">Personal Details</li>
+                        <li>Employment</li>
+                        <li>Contact</li>
+                        <li>Area & Access</li>
+                        <li>Declaration</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="margin-top:18px">
+                  <!-- Tab 1 - Personal -->
+                  <div class="tab-pane" id="tab1">
+                    <div class="row-fluid">
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>First Name <span class="required">*</span></label>
+                          <input id="FirstName" name="FirstName" type="text" maxlength="70" class="requiredElement" tabindex="1" />
+                        </div>
+                      </div>
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Surname <span class="required">*</span></label>
+                          <input id="LastName" name="LastName" type="text" maxlength="70" class="requiredElement" tabindex="2" />
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Gender <span class="required">*</span></label>
+                          <div class="selection-box">
+                            <select name="Gender" id="Gender" class="requiredElement" tabindex="3">
+                              <option value="">Select gender</option>
+                              <option value="F">Female</option>
+                              <option value="M">Male</option>
+                              <option value="N">Prefer not to say</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Date of Birth <span class="required">*</span></label>
+                          <input id="BirthDate" name="BirthDate" class="datepicker requiredElement" type="text" maxlength="10" placeholder="dd/mm/yyyy" autocomplete="off" tabindex="4" />
+                          <span class="date-label"><span style="padding-right:8px">Select the date using the calendar</span> dd/mm/yyyy</span>
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Country of Birth</label>
+                          <div class="selection-box">
+                            <select id="Country" name="Country">
+                              <option value="">Select country of birth</option>
+                              <option>Zambia</option>
+                              <option>United Kingdom</option>
+                              <option>Other</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Nationality</label>
+                          <div class="selection-box">
+                            <select id="Nationality" name="Nationality">
+                              <option value="">Select nationality</option>
+                              <option>Zambian</option>
+                              <option>British</option>
+                              <option>Other</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>ID / Passport <span class="required">*</span></label>
+                          <input id="IDNo" name="IDNo" type="text" maxlength="40" class="requiredElement" />
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Preferred Name</label>
+                          <input id="PreferredName" name="PreferredName" type="text" maxlength="70" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Tab 2 - Employment -->
+                  <div class="tab-pane" id="tab2" style="margin-top:8px">
+                    <div class="row-fluid">
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Campus <span class="required">*</span></label>
+                          <div class="selection-box">
+                            <select id="Campus" name="Campus" class="requiredElement">
+                              <option value="">Select campus</option>
+                              <option>Trident Prep Lusaka</option>
+                              <option>Trident Prep Solwezi</option>
+                              <option>Central Administration</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Position / Job Title <span class="required">*</span></label>
+                          <input id="Position" name="Position" type="text" class="requiredElement" />
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Department <span class="required">*</span></label>
+                          <div class="selection-box">
+                            <select id="Department" name="Department" class="requiredElement">
+                              <option value="">Select department</option>
+                              <option>Human Resources</option>
+                              <option>Finance</option>
+                              <option>Teaching</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Reporting To <span class="required">*</span></label>
+                          <input id="ReportingTo" name="ReportingTo" type="text" class="requiredElement" />
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Employment Type</label>
+                          <select id="EmploymentType" name="EmploymentType">
+                            <option value="">Select type</option>
+                            <option>Permanent</option>
+                            <option>Contract</option>
+                            <option>Part-time</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Expected Start Date <span class="required">*</span></label>
+                          <input id="StartDate" name="StartDate" type="text" placeholder="dd/mm/yyyy" class="datepicker requiredElement" />
+                          <span class="date-label">dd/mm/yyyy</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Tab 3 - Contact -->
+                  <div class="tab-pane" id="tab3" style="margin-top:8px">
+                    <div class="row-fluid">
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Email Address <span class="required">*</span></label>
+                          <input id="Email" name="Email" type="email" class="requiredElement" />
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Cell Phone</label>
+                          <input id="Cell" name="Cell" type="tel" />
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Work Phone</label>
+                          <input id="WorkPhone" name="WorkPhone" type="tel" />
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Residential Address</label>
+                          <input id="Address" name="Address" type="text" />
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Emergency Contact Name <span class="required">*</span></label>
+                          <input id="EmergName" name="EmergName" type="text" class="requiredElement" />
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Emergency Contact Phone <span class="required">*</span></label>
+                          <input id="EmergPhone" name="EmergPhone" type="tel" class="requiredElement" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Tab 4 - Area & Access -->
+                  <div class="tab-pane" id="tab4" style="margin-top:8px">
+                    <div class="row-fluid">
+                      <div class="span12">
+                        <div class="FormFields">
+                          <label>Primary Area of Work</label>
+                          <div class="selection-inline" role="radiogroup" aria-label="area of work">
+                            <label><input type="radio" name="WorkArea" value="Academic" checked/> Academic</label>
+                            <label><input type="radio" name="WorkArea" value="Admin"/> Administration</label>
+                            <label><input type="radio" name="WorkArea" value="Support"/> Support</label>
+                            <label><input type="radio" name="WorkArea" value="Maintenance"/> Maintenance</label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Functional Group</label>
+                          <select id="FunctionalGroup" name="FunctionalGroup">
+                            <option value="">Select group</option>
+                            <option>Teaching</option>
+                            <option>HR</option>
+                            <option>IT</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Initial System Access Request</label>
+                          <select id="AccessLevel" name="AccessLevel">
+                            <option value="">Select access</option>
+                            <option>General Staff</option>
+                            <option>Teacher</option>
+                            <option>HR - Edit</option>
+                          </select>
+                          <div class="note">Full rights are provisioned by HR after review.</div>
+                        </div>
+                      </div>
+
+                      <div class="span12">
+                        <div class="FormFields">
+                          <label>Staff is a Parent</label>
+                          <div class="selection-box">
+                            <select id="IsParent" name="IsParent">
+                              <option value="0">No</option>
+                              <option value="1">Yes</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="span12">
+                        <div class="FormFields">
+                          <div style="padding:10px;border-left:4px solid var(--accent);background:rgba(250,194,79,.06);border-radius:4px">
+                            <strong>Note:</strong> Payroll fields have been removed from this page. HR will review payroll setup on a separate screen and request clarifications or documents as needed.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Tab 5 - Declaration -->
+                  <div class="tab-pane" id="tab5" style="margin-top:8px">
+                    <div class="row-fluid">
+                      <div class="span12">
+                        <div class="FormFields">
+                          <label>
+                            <input id="ConfirmAccuracy" name="ConfirmAccuracy" type="checkbox" class="requiredElement" />
+                            &nbsp; I confirm the information provided is true and accurate. <span class="required">*</span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Digital Signature / Full Name <span class="required">*</span></label>
+                          <input id="SignatureName" name="SignatureName" type="text" class="requiredElement" />
+                        </div>
+                      </div>
+
+                      <div class="span6">
+                        <div class="FormFields">
+                          <label>Date Signed <span class="required">*</span></label>
+                          <input id="SignatureDate" name="SignatureDate" type="text" class="datepicker requiredElement" placeholder="dd/mm/yyyy" />
+                        </div>
+                      </div>
+
+                      <div class="span12">
+                        <div class="FormFields">
+                          <label>Comments for HR</label>
+                          <textarea id="HRComments" name="HRComments" rows="4" style="width:100%;"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- actions -->
+                  <div style="margin-top:12px" class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="saveDraft">Save Draft</button>
+                    <button type="button" class="btn btn-secondary" id="reviewBtn">Review Application</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">Submit Application</button>
+                    <button type="button" class="btn" id="hrReviewBtn">HR Review (Payroll Separate)</button>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    (function(){
+      const form = document.getElementById('hrOnboardForm');
+      const requiredEls = Array.from(form.querySelectorAll('.requiredElement'));
+      const reviewBtn = document.getElementById('reviewBtn');
+      const saveDraft = document.getElementById('saveDraft');
+      const hrReviewBtn = document.getElementById('hrReviewBtn');
+
+      function validateRequired(){
+        const missing = [];
+        requiredEls.forEach(el=>{
+          if(el.type === 'checkbox'){
+            if(!el.checked) missing.push(el);
+          } else {
+            if(!el.value || el.value.trim()==='') missing.push(el);
+          }
+        });
+        return missing;
+      }
+
+      reviewBtn.addEventListener('click',()=>{
+        const miss = validateRequired();
+        if(miss.length){
+          alert('Review: ' + miss.length + ' required field(s) missing. First missing field will be focused.');
+          miss[0].focus();
+          return;
+        }
+        alert('All required fields appear completed. Submit when ready. Payroll will be handled separately by HR.');
+      });
+
+      saveDraft.addEventListener('click',()=>{
+        alert('Save draft: implement backend save in development.');
+      });
+
+      hrReviewBtn.addEventListener('click',()=>{
+        alert('HR Review placeholder: open the separate HR payroll/review page from your application admin area.');
+      });
+
+      form.addEventListener('submit',function(e){
+        e.preventDefault();
+        const miss = validateRequired();
+        if(miss.length){
+          alert('Please complete required fields before submitting.');
+          miss[0].focus();
+          return;
+        }
+        alert('Form submitted (sample). HR will be notified to proceed with payroll setup separately.');
+      });
+    })();
+  </script>
+</body>
+</html>
