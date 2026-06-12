@@ -482,6 +482,133 @@
     </form>
   </div>
 
+<!-- Add this new section after your existing sections inside the <form> -->
+
+<!-- Qualifications Section -->
+<div style="margin-top: 24px;">
+  <h3>Qualifications</h3>
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="FormFields">
+        <label for="idDocument">Attach National ID Document <span class="required">*</span></label>
+        <input id="idDocument" name="idDocument" type="file" accept=".jpg,.jpeg,.png,.pdf" required />
+        <small class="note">Accepted formats: JPG, PNG, PDF. Max size 2MB.</small>
+      </div>
+    </div>
+    <div class="span6">
+      <div class="FormFields">
+        <label for="passportDocument">Attach Passport Document</label>
+        <input id="passportDocument" name="passportDocument" type="file" accept=".jpg,.jpeg,.png,.pdf" />
+        <small class="note">Accepted formats: JPG, PNG, PDF. Max size 2MB.</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="FormFields">
+        <label for="academicCertificates">Attach Academic Certificates</label>
+        <input id="academicCertificates" name="academicCertificates" type="file" accept=".jpg,.jpeg,.png,.pdf" multiple />
+        <small class="note">You may upload multiple files. Accepted formats: JPG, PNG, PDF. Max size 2MB each.</small>
+      </div>
+    </div>
+    <div class="span6">
+      <div class="FormFields">
+        <label for="taxCertificates">Attach Tax Certificates</label>
+        <input id="taxCertificates" name="taxCertificates" type="file" accept=".jpg,.jpeg,.png,.pdf" multiple />
+        <small class="note">You may upload multiple files. Accepted formats: JPG, PNG, PDF. Max size 2MB each.</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="FormFields">
+        <label for="qualificationYear">Year of Qualification <span class="required">*</span></label>
+        <input id="qualificationYear" name="qualificationYear" type="number" min="1900" max="2099" step="1" placeholder="e.g. 2020" required />
+      </div>
+    </div>
+    <div class="span6">
+      <div class="FormFields">
+        <label for="qualificationDuration">Duration (Years) <span class="required">*</span></label>
+        <input id="qualificationDuration" name="qualificationDuration" type="number" min="0" step="0.1" placeholder="e.g. 3" required />
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="FormFields">
+        <label for="graduationDate">Graduation Date <span class="required">*</span></label>
+        <input id="graduationDate" name="graduationDate" type="date" required />
+      </div>
+    </div>
+    <div class="span6">
+      <div class="FormFields">
+        <label for="institution">Institution <span class="required">*</span></label>
+        <input id="institution" name="institution" type="text" maxlength="100" placeholder="Name of institution" required />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Work History Section -->
+<div style="margin-top: 24px;">
+  <h3>Work History</h3>
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="FormFields">
+        <label for="employmentStart">Employment Start Date <span class="required">*</span></label>
+        <input id="employmentStart" name="employmentStart" type="date" required />
+      </div>
+    </div>
+    <div class="span6">
+      <div class="FormFields">
+        <label for="employmentEnd">Employment End Date</label>
+        <input id="employmentEnd" name="employmentEnd" type="date" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="FormFields">
+        <label for="placeOfWork">Place of Work <span class="required">*</span></label>
+        <input id="placeOfWork" name="placeOfWork" type="text" maxlength="100" required />
+      </div>
+    </div>
+    <div class="span6">
+      <div class="FormFields">
+        <label for="workExperienceType">Work Experience Type <span class="required">*</span></label>
+        <select id="workExperienceType" name="workExperienceType" required>
+          <option value="">Select type</option>
+          <option value="Full-time">Full-time</option>
+          <option value="Part-time">Part-time</option>
+          <option value="Contract">Contract</option>
+          <option value="Internship">Internship</option>
+          <option value="Temporary">Temporary</option>
+          <option value="Volunteer">Volunteer</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="FormFields">
+        <label for="positionHeld">Position Held <span class="required">*</span></label>
+        <input id="positionHeld" name="positionHeld" type="text" maxlength="100" required />
+      </div>
+    </div>
+    <div class="span6">
+      <div class="FormFields">
+        <label for="responsibilities">Responsibilities</label>
+        <textarea id="responsibilities" name="responsibilities" rows="4" placeholder="Describe your responsibilities"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+  
   <script>
     (function(){
       const form = document.getElementById('hrOnboardForm');
