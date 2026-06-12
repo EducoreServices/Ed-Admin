@@ -86,10 +86,10 @@
                   <td>
                     <div class="reportlogo">
                       <div class="logo-left">
-                        <div class="logo-placeholder">Your Org Logo</div>
+                        <div class="logo-placeholder">Educore Services Logo</div>
                       </div>
                       <td class="logo-right">
-                        <div class="logo-small">ed-admin</div>
+                        <div class="logo-small">Ed-Admin</div>
                       </td>
                     </div>
                   </td>
@@ -123,7 +123,22 @@
                     </div>
                   </div>
                 </div>
-
+           
+              <div class="field span-3">
+              <label for="title">Title</label>
+              <select id="title" name="title">
+                <option value="">Select title</option>
+                <option>Miss</option>
+                <option>Mr</option>
+                <option>Mrs</option>
+                <option>Ms</option>
+                <option>Dr</option>
+                <option>Professor</option>
+                <option>Pastor</option>
+                <option>Other</option>
+              </select>
+            </div>
+                
                 <div style="margin-top:18px">
                   <!-- Tab 1 - Personal -->
                   <div class="tab-pane" id="tab1">
@@ -185,6 +200,8 @@
                               <option value="">Select nationality</option>
                               <option>Zambian</option>
                               <option>British</option>
+                              <option>South African</option>
+                              <option>Zimbabwean</option>
                               <option>Other</option>
                             </select>
                           </div>
@@ -218,6 +235,13 @@
                               <option value="">Select campus</option>
                               <option>Trident Prep Lusaka</option>
                               <option>Trident Prep Solwezi</option>
+                              <option>Trident Prep Kalumbila</option>
+                              <option>Trident College Solwezi</option>
+                              <option>Sentinel Kalumbila Primary</option>
+                              <option>Sentinel Kabitaka Primary</option>
+                              <option>Sentinel Kabitaka Secondary</option>
+                              <option>Frontier Nkisu Primary</option>
+                              <option>Educore Foundation</option>
                               <option>Central Administration</option>
                             </select>
                           </div>
@@ -239,6 +263,14 @@
                               <option value="">Select department</option>
                               <option>Human Resources</option>
                               <option>Finance</option>
+                              <option>Information Technology</option>
+                              <option>Operations</option>
+                              <option>Early Years & Foundation Stage</option>
+                              <option>Key Stage 1</option>
+                              <option>Key Stage 2</option>
+                              <option>Key Stage 3</option>
+                              <option>AS</option>
+                              <option>A2</option>
                               <option>Teaching</option>
                             </select>
                           </div>
@@ -312,6 +344,19 @@
                         </div>
                       </div>
 
+                      <div class="field span-4">
+                        <label for="emergencyRelationship">Relationship</label>
+                        <select id="emergencyRelationship" name="emergencyRelationship">
+                          <option value="">Select relationship</option>
+                          <option>Spouse</option>
+                          <option>Parent</option>
+                          <option>Sibling</option>
+                          <option>Guardian</option>
+                          <option>Friend</option>
+                          <option>Other</option>
+                        </select>
+                      </div>
+                      
                       <div class="span6">
                         <div class="FormFields">
                           <label>Emergency Contact Phone <span class="required">*</span></label>
@@ -355,7 +400,8 @@
                             <option value="">Select access</option>
                             <option>General Staff</option>
                             <option>Teacher</option>
-                            <option>HR - Edit</option>
+                            <option>Administration</option>
+                            <option>Support Staff</option>
                           </select>
                           <div class="note">Full rights are provisioned by HR after review.</div>
                         </div>
